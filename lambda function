@@ -1,0 +1,22 @@
+import json
+import smtplib
+
+def lambda_handler(event, context):
+    # TODO implement
+    print(event)
+    msg=json.loads(event['body'])
+    print(msg)
+    print(msg['to'])
+    print(msg['message'])
+    server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+    server.login("nciaccommodation0@gmail.com","usequcjjriwuddad")
+    server.sendmail("nciaccommodation0@gmail.com",
+        msg['to'],
+        msg['message']
+    )
+    server.quit()
+    # body=event['body']
+    return {
+        'statusCode': 200,
+        'body': json.dumps(event)
+    }
